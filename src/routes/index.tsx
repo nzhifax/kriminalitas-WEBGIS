@@ -5,7 +5,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "KRIMATLAS" },
+      { title: "CRIMEMAP" },
       {
         name: "description",
         content:
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "KRIMATLAS",
+        content: "CRIMEMAP",
       },
       {
         property: "og:description",
@@ -33,6 +33,7 @@ function CrimeAtlas() {
       <Nav />
       <Hero />
       <Introduction />
+      <StudyArea/>
       <Methodology />
       <MapSection />
       <Results />
@@ -55,15 +56,16 @@ function Nav() {
             aria-hidden
           />
           <span className="text-display text-[15px] font-medium tracking-tight">
-            KRIMATLAS
+            CRIMEMAP
           </span>
         </div>
         <nav className="hidden items-center gap-8 text-[13px] text-[var(--ink-soft)] md:flex">
-          <a href="#introduction" className="hover:text-foreground">introduction</a>
-          <a href="#methodology" className="hover:text-foreground">Methodology</a>
-          <a href="#analisysmap" className="hover:text-foreground">Map</a>
-          <a href="#results" className="hover:text-foreground">Result</a>
-          <a href="#about" className="hover:text-foreground">About</a>
+          <a href="#introduction" className="hover:text-foreground">Pendahuluan</a>
+          <a href="#studyarea" className="hover:text-foreground">Area Kajian</a>
+          <a href="#methodology" className="hover:text-foreground">Metodologi</a>
+          <a href="#analisysmap" className="hover:text-foreground">Peta</a>
+          <a href="#results" className="hover:text-foreground">Hasil</a>
+          <a href="#about" className="hover:text-foreground">Tentang</a>
         </nav>
 
         <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -113,10 +115,10 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.05 }}
             className="text-display text-[clamp(3rem,6.5vw,5.75rem)] text-foreground"
           >
-            KRIM<span style={{ color: RED }}>ATLAS.</span>
-<span className="block mt-3 text-[28px]  font-normal leading-relaxed tracking-wide text-[var(--ink-soft)]">
-  Crime Risk Mapping & Spatial Analysis
-</span>
+            CRIME<span style={{ color: RED }}>MAP.</span>
+          <span className="block mt-3 text-[28px]  font-normal leading-relaxed tracking-wide text-[var(--ink-soft)]">
+            Platform Analisis Spasial Kriminalitas Kabupaten Kudus
+          </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -124,9 +126,8 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mt-8 max-w-xl text-[16px] leading-[1.65] text-[var(--ink-mute)]"
           >
-            Mengidentifikasi kawasan rawan kriminalitas
-            di Kabupaten Kudus menggunakan metode
-            Kernel Density Estimation (KDE).
+            WebGIS interaktif untuk eksplorasi hotspot kriminalitas, analisis risiko wilayah, dan 
+            karakteristik kejadian kriminal di Kabupaten Kudus.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -138,40 +139,44 @@ function Hero() {
               href="#analisysmap"
               className="rounded-md bg-foreground px-5 py-3 text-[13.5px] font-medium text-background transition hover:opacity-90"
             >
-              Explore Map →
+              Jelajahi Peta →
             </a>
             <a
-              href="#results"
+              href="https://forms.gle/xxxxxxxxxxxxxxxxx"
               className="rounded-md border hairline bg-background px-5 py-3 text-[13.5px] font-medium text-foreground transition hover:bg-[var(--surface-1)]"
             >
-              View Analysis
+              Berikan Penilaian Anda
             </a>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.1 }}
-          className="relative h-[440px] overflow-hidden rounded-xl border hairline bg-[var(--surface-1)] lg:h-[560px]"
-        >
-        <iframe
-          src="https://your-carto-url"
-          className="h-full w-full border-0"
-          loading="lazy"
-        />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent" />
-          <div className="absolute left-4 top-4 rounded-md border hairline bg-white/85 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)] backdrop-blur">
-            Live preview
-          </div>
-          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-md border hairline bg-white/85 px-3 py-2 text-[11.5px] text-[var(--ink-soft)] backdrop-blur">
-            <span>area kajian - kabupaten kudus </span>
-            <span className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ background: RED }} />
-              CARTO basemap
-            </span>
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="relative h-[440px] overflow-hidden bg-white lg:h-[560px]"
+          >
+            <img
+              src="src/public/images/landing.png"
+              alt="Peta Kriminalitas Kabupaten Kudus"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent" />
+
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-md border hairline bg-white/85 px-3 py-2 text-[11.5px] text-[var(--ink-soft)] backdrop-blur">
+              <span>Kabupaten Kudus, Jawa Tengah</span>
+
+              <span className="flex items-center gap-1.5">
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ background: RED }}
+                />
+                Penelitian Tugas Akhir · 2026
+              </span>
+            </div>
+          </motion.div>
       </div>
     </section>
   );
@@ -185,20 +190,14 @@ function Introduction() {
       <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-28">
         <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-              Introduction · 01
-            </div>
+            {/* <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Profil· 01
+            </div> */}
 
-            <h2 className="text-display mt-3 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)]">
-              Analisis Kawasan Rawan Kriminalitas di Kabupaten Kudus.
+            <h2 className="mt-2 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] font-bold">
+               PENDAHULUAN
             </h2>
           </div>
-
-          <p className="max-w-md text-[14.5px] leading-[1.65] text-[var(--ink-mute)]">
-            KRIMATLAS merupakan web map interaktif yang dikembangkan untuk
-            memvisualisasikan kawasan rawan kriminalitas di Kabupaten Kudus
-            menggunakan metode Kernel Density Estimation (KDE).
-          </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -208,10 +207,9 @@ function Introduction() {
             </div>
 
             <p className="text-[14px] leading-[1.8] text-[var(--ink-soft)]">
-              Kriminalitas merupakan permasalahan yang dapat memengaruhi
-              keamanan, ketertiban, dan kualitas hidup masyarakat. Analisis
-              spasial diperlukan untuk mengidentifikasi lokasi yang memiliki
-              konsentrasi kejadian kriminalitas tinggi.
+              Kriminalitas tidak tersebar secara acak, melainkan cenderung terkonsentrasi 
+              pada lokasi tertentu yang membentuk hotspot kriminalitas. Identifikasi pola spasial tersebut 
+              penting untuk mendukung pencegahan dan penanggulangan kejahatan secara lebih efektif. 
             </p>
           </div>
 
@@ -221,24 +219,119 @@ function Introduction() {
             </div>
 
             <p className="text-[14px] leading-[1.8] text-[var(--ink-soft)]">
-              Menganalisis pola spasial kawasan rawan kriminalitas menggunakan
-              metode KDE, mengevaluasi kemampuan prediktif hotspot dengan PAI,
-              serta menyajikan hasil analisis melalui web map interaktif.
+              Menganalisis pola spasial kawasan rawan kriminalitas di Kabupaten Kudus 
+              menggunakan KDE, mengevaluasi kemampuan prediktif hasil analisis dengan PAI, serta 
+              menyajikan informasi kriminalitas melalui web map interaktif.
             </p>
           </div>
 
           <div className="rounded-xl border hairline p-6">
             <div className="mb-3 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-              Metodologi
+               Manfaat Penelitian
             </div>
 
             <p className="text-[14px] leading-[1.8] text-[var(--ink-soft)]">
-              Kernel Density Estimation (KDE) digunakan untuk menghasilkan
-              permukaan kepadatan kriminalitas sehingga hotspot dapat
-              diidentifikasi dan divisualisasikan secara spasial di wilayah
-              Kabupaten Kudus.
+              Hasil penelitian diharapkan dapat mendukung pengambilan keputusan dalam 
+              pencegahan dan penanggulangan kriminalitas, serta menyediakan media informasi spasial yang 
+              mudah diakses melalui web map interaktif.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Study Area Section ---------------- */
+
+function StudyArea() {
+  return (
+    <section id="studyarea" className="border-b hairline">
+      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
+
+        {/* <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+          Wilayah Kajian · 02
+        </div> */}
+
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+
+          {/* LEFT CONTENT */}
+          <div>
+          <h2 className="mt-2 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] font-bold">
+            WILAYAH KAJIAN
+          </h2>
+
+            <p className="mt-8 max-w-2xl text-[15px] leading-[1.9] text-[var(--ink-mute)]">
+              Kabupaten Kudus merupakan salah satu pusat kegiatan ekonomi di Jawa Tengah 
+              dengan karakteristik wilayah yang beragam, mulai dari kawasan perkotaan, permukiman padat, 
+              hingga wilayah perdesaan. Tingginya aktivitas penduduk dan mobilitas pada berbagai pusat 
+              kegiatan berpotensi memengaruhi pola persebaran kriminalitas. Oleh karena itu, Kabupaten 
+              Kudus dipilih sebagai wilayah kajian untuk mengidentifikasi kawasan rawan kriminalitas dan 
+              karakteristik spasialnya.
+            </p>
+
+            {/* Stats */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+
+              <div className="rounded-xl border hairline p-5">
+                <div className="text-[28px] font-semibold text-foreground">
+                  425
+                </div>
+
+                <div className="mt-1 text-[13px] text-[var(--ink-mute)]">
+                 Luas Wilayah km² 
+                </div>
+              </div>
+
+              <div className="rounded-xl border hairline p-5">
+                <div className="text-[28px] font-semibold text-foreground">
+                  9
+                </div>
+
+                <div className="mt-1 text-[13px] text-[var(--ink-mute)]">
+                  Kecamatan
+                </div>
+              </div>
+
+              <div className="rounded-xl border hairline p-5">
+                <div className="text-[28px] font-semibold text-foreground">
+                  132
+                </div>
+
+                <div className="mt-1 text-[13px] text-[var(--ink-mute)]">
+                  Desa/Kelurahan
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* RIGHT MAP */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+              className="relative h-[440px] overflow-hidden rounded-xl border hairline bg-[var(--surface-1)] lg:h-[560px]"
+            >
+            <iframe
+              src="https://your-carto-url"
+              className="h-full w-full border-0"
+              loading="lazy"
+            />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent" />
+              <div className="absolute left-4 top-4 rounded-md border hairline bg-white/85 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)] backdrop-blur">
+                Live preview
+              </div>
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-md border hairline bg-white/85 px-3 py-2 text-[11.5px] text-[var(--ink-soft)] backdrop-blur">
+                <span>area kajian - kabupaten kudus </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: RED }} />
+                  CARTO basemap
+                </span>
+              </div>
+            </motion.div>
+
         </div>
       </div>
     </section>
@@ -254,9 +347,9 @@ function Methodology() {
   {
     n: "01",
     t: "Pengumpulan & Klasifikasi Data",
-    d: "Data laporan polisi diklasifikasikan berdasarkan ICCS.",
+    d: "Mengklasifikasikan data laporan polisi berdasarkan ICCS.",
     detail:
-      "Data penelitian diperoleh dari Laporan Polisi Polres Kudus periode Juni 2021–Mei 2026. Setiap kejadian diklasifikasikan berdasarkan International Classification of Crime for Statistical Purposes (ICCS) sehingga diperoleh kelompok dan jenis kejahatan yang terstandarisasi. Tahap ini menghasilkan basis data kriminalitas yang siap digunakan untuk analisis spasial.",
+      "Data Laporan Polisi (LP) dari Polres Kudus periode 2021–2026 dikompilasi dan disusun ke dalam format tabular yang seragam. Selanjutnya, setiap kejadian diklasifikasikan ulang berdasarkan International Classification of Crime for Statistical Purposes (ICCS) untuk menghasilkan kategori kelompok dan jenis kejahatan yang konsisten sebagai dasar analisis spasial.",
     image: "/src/public/images/md1.png",
       visual: "Diagram distribusi kelompok dan jenis kejahatan"
   },
@@ -264,20 +357,20 @@ function Methodology() {
   {
     n: "02",
     t: "Geocoding TKP",
-    d: "Konversi lokasi kejadian menjadi koordinat geografis.",
+    d: "Mengonversi lokasi kejadian kriminal menjadi koordinat geografis.",
     detail:
-      "Informasi lokasi pada setiap laporan polisi dikonversi menjadi koordinat geografis melalui proses geocoding. Hasil proses ini berupa data titik kriminalitas yang merepresentasikan lokasi kejadian di lapangan. Data titik selanjutnya digunakan sebagai dasar seluruh analisis spasial.",
-    image: "/src/public/images/md1.png",
-      visual: "Alamat LP → Koordinat → Titik pada Peta"
+      "Informasi lokasi kejadian (TKP) yang tersimpan dalam basis data dikonversi menjadi koordinat geografis melalui proses geocoding menggunakan Google My Maps. Seluruh titik hasil geocoding kemudian diverifikasi dan disesuaikan secara manual berdasarkan informasi pada Laporan Polisi untuk memastikan lokasi kejadian direpresentasikan secara lebih akurat.",
+    image: "/src/public/images/md2.png",
+      visual: "Alamat TKP → Koordinat → Titik pada Peta"
   },
 
   {
     n: "03",
     t: "Analisis Spasial",
-    d: "Identifikasi hotspot dan karakteristik spasial kriminalitas.",
+    d: "Mengidentifikasi kawasan rawan kriminalitas dan menganalisis karakteristik spasial kejadian kriminal.",
     detail:
-      "Pola persebaran kriminalitas dianalisis menggunakan Kernel Density Estimation (KDE) untuk mengidentifikasi hotspot kriminalitas. Selain itu dilakukan analisis kepadatan permukiman dan jarak kejadian kriminalitas terhadap jaringan jalan arteri maupun kolektor untuk memahami hubungan antara kriminalitas dan kondisi lingkungan.",
-    image: "/src/public/images/md1.png",
+      "Data lokasi kejadian kriminal dianalisis menggunakan metode Kernel Density Estimation (KDE) untuk mengidentifikasi hotspot kriminalitas. Selain itu, dilakukan analisis karakteristik spasial terhadap faktor lingkungan sekitar kejadian serta perhitungan statistik per wilayah administrasi untuk memperoleh informasi tingkat kerawanan kriminalitas pada setiap desa.",
+    image: "/src/public/images/md3.png",
       visual: "Peta Hotspot KDE"
   },
 
@@ -286,28 +379,28 @@ function Methodology() {
     t: "Evaluasi PAI",
     d: "Pengujian kemampuan prediktif hotspot kriminalitas.",
     detail:
-      "Hotspot kriminalitas dievaluasi menggunakan Predictive Accuracy Index (PAI). Evaluasi dilakukan dengan membandingkan hotspot periode Juni 2021–Mei 2025 terhadap data kejadian kriminalitas periode Juni 2025–Mei 2026 untuk mengetahui kemampuan prediksi hotspot.",
-    image: "/src/public/images/md1.png",
+      "Area hotspot dengan tingkat kepadatan kriminalitas tertinggi hasil KDE dievaluasi menggunakan data kriminalitas pada periode pengujian. Evaluasi dilakukan dengan metode Predictive Accuracy Index (PAI) untuk mengukur efektivitas hotspot sebagai indikator kawasan rawan kriminalitas.",
+    image: "/src/public/images/md4.png",
       visual: "Hotspot + Titik Kriminalitas Tahun Berikutnya"
   },
 
   {
     n: "05",
     t: "Integrasi Hasil",
-    d: "Visualisasi hasil analisis pada platform KRIMATLAS.",
+    d: "Mengintegrasikan hasil analisis dan memvisualisasikannya melalui platform CRIMEMAP.",
     detail:
-      "Seluruh hasil analisis diintegrasikan ke dalam platform CARTO untuk membangun webmap kriminalitas Kabupaten Kudus. Peta interaktif dilengkapi layer hotspot kriminalitas, tingkat kerawanan per desa, karakteristik spasial, serta dashboard statistik yang dapat dieksplorasi pengguna.",
-    image: "/src/public/images/md1.png",
-      visual: "Dashboard KRIMATLAS"
+      "Seluruh hasil analisis, mulai dari hotspot kriminalitas, karakteristik spasial kejadian, tingkat kerawanan desa, hingga hasil evaluasi PAI, diintegrasikan ke dalam platform WebGIS CRIMEMAP. Integrasi ini memungkinkan pengguna mengeksplorasi informasi kriminalitas secara interaktif melalui peta, grafik, filter, dan berbagai fitur analisis dalam satu platform yang terhubung.",
+    image: "/src/public/images/md5.png",
+      visual: "Dashboard CRIMEMAP"
   },
 
   {
     n: "06",
-    t: "Evaluasi Usabilitas",
-    d: "Pengujian kemudahan penggunaan webmap.",
+    t: "Uji Usabilitas",
+    d: "Mengukur tingkat kemudahan penggunaan webmap melalui pengujian usabilitas.",
     detail:
-      "Webmap yang telah dikembangkan dievaluasi menggunakan kuesioner berbasis lima aspek usabilitas (5Es), yaitu Effective, Efficient, Engaging, Error Tolerant, dan Easy to Learn. Hasil evaluasi digunakan untuk menilai kualitas penggunaan sistem.",
-    image: "/src/public/images/md1.png",
+      "WebGIS CRIMEMAP dievaluasi melalui pengujian usabilitas menggunakan kuesioner yang diberikan kepada pengguna. Pengujian ini bertujuan untuk mengukur lima aspek usabilitas (5Es), yaitu effective, efficient, engaging, error tolerant, dan easy to learn, sehingga dapat diketahui tingkat kemudahan penggunaan serta kualitas pengalaman pengguna dalam mengakses informasi kriminalitas melalui platform.",
+    image: "/src/public/images/md6.png",
       visual: "Diagram Hasil Evaluasi 5Es"
   }
   ];
@@ -315,21 +408,13 @@ function Methodology() {
   return (
     <section id="methodology" className="border-b hairline">
       <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
-        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+        {/* <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
           Methodology · 02
-        </div>
+        </div> */}
 
-        <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
-          Alur Analisis Kawasan Rawan Kriminalitas
+        <h2 className="mt-2 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] font-bold">
+           ALUR PENELITIAN
         </h2>
-
-        <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-[var(--ink-mute)]">
-          Penelitian ini menggunakan pendekatan analisis spasial berbasis
-          Kernel Density Estimation (KDE) untuk mengidentifikasi hotspot
-          kriminalitas di Kabupaten Kudus, mengevaluasi kemampuan prediktif
-          menggunakan Predictive Accuracy Index (PAI), dan menyajikannya
-          melalui platform KRIMATLAS.
-        </p>
 
         <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border hairline bg-[var(--hairline)] md:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
@@ -451,29 +536,21 @@ function MapSection() {
       <div className="mx-auto max-w-[1400px] px-6 pb-6 pt-20 lg:px-10 lg:pt-28">
         <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+            {/* <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
               Analysis Map · 03
-            </div>
+            </div> */}
 
-            <h2 className="text-display mt-3 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)]">
-              Visualisasi Kawasan Rawan Kriminalitas.
+            <h2 className="mt-2 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] font-bold">
+              Jelajahi CRIMEMAP
             </h2>
           </div>
-
-          <p className="max-w-md text-[14.5px] leading-[1.65] text-[var(--ink-mute)]">
-            Eksplorasi hasil analisis kriminalitas Kabupaten Kudus melalui
-            platform KRIMATLAS. Peta interaktif menampilkan hotspot
-            kriminalitas, tingkat kerawanan wilayah, karakteristik spasial,
-            serta berbagai informasi pendukung untuk mendukung interpretasi
-            hasil penelitian.
-          </p>
         </div>
       </div>
 
       <div className="relative">
         <div className="relative mx-auto h-[640px] max-w-[1400px] overflow-hidden border-y hairline rounded-xl lg:h-[720px]">
           <iframe
-            src="LINK_CARTO_MAP"
+            src="https://thunbergii.app.carto.com/map/d66edab3-d873-435f-bef3-f896fe2716c5"
             title="Crime Atlas Dashboard"
             loading="lazy"
             className="h-full w-full border-0"
@@ -509,41 +586,68 @@ function Results() {
   const results = [
     {
       n: "01",
-      t: "Hotspot Kriminalitas",
+      t: "Distribusi Kriminalitas",
       d: "Identifikasi kawasan dengan konsentrasi kriminalitas tertinggi menggunakan KDE.",
-      image: "/images/results/hotspot-map.png",
-      visual: "Peta hotspot kriminalitas hasil Kernel Density Estimation.",
+      image: "/src/public/images/Picture1.png",
+      visual: "Diagram klasifikasi kejadian kriminal di Kabupaten Kudus.",
       detail:
-        "Hasil analisis KDE menunjukkan bahwa kriminalitas di Kabupaten Kudus tidak tersebar secara merata. Konsentrasi kejadian kriminalitas cenderung terpusat pada wilayah tertentu yang membentuk hotspot dengan tingkat kerawanan tinggi."
-    },
+        "Sebanyak 415 kejadian kriminal di Kabupaten Kudus diklasifikasikan ke dalam sembilan kelompok kejahatan berdasarkan ICCS. Kasus didominasi oleh kejahatan terhadap hak milik tanpa kekerasan, penipuan dan penggelapan, serta kejahatan terhadap fisik yang menyebabkan luka atau menyakiti orang lain."
+        },
 
     {
       n: "02",
-      t: "Karakteristik Spasial",
+      t: "Hotspot Kriminalitas",
       d: "Hubungan kriminalitas dengan kepadatan permukiman dan jaringan jalan.",
-      image: "/images/results/spatial-characteristics.png",
+      image: "/src/public/images/Picture2.png",
       visual:
-        "Diagram kepadatan permukiman dan jarak terhadap jalan arteri/kolektor.",
+        "Hotspot kriminalitas yang terjadi di Kabupaten Kudus.",
       detail:
-        "Sebagian besar kejadian kriminalitas ditemukan pada wilayah dengan kepadatan permukiman sedang hingga tinggi. Selain itu, kejadian kriminalitas cenderung berada pada lokasi yang berdekatan dengan jaringan jalan utama."
-    },
+        "Analisis KDE menunjukkan bahwa kriminalitas di Kabupaten Kudus terkonsentrasi pada wilayah tengah kabupaten, terutama di Kecamatan Kota Kudus. Tingkat kerawanan cenderung menurun ke arah wilayah pinggiran, dengan area berkerawanan sangat rendah yang dominan di bagian selatan dan utara kabupaten."
+        },
 
     {
       n: "03",
-      t: "Evaluasi PAI",
-      d: "Pengujian kemampuan prediktif hotspot kriminalitas.",
-      image: "/images/results/pai-evaluation.png",
+      t: "Analisis Zona",
+      d: "Klasifikasi tingkat kerawanan kriminalitas pada setiap desa berdasarkan hasil KDE.",
+      image: "/src/public/images/Picture3.png",
       visual:
-        "Overlay hotspot dengan data kriminalitas periode pengujian.",
+        "Peta tingkat kerawanan kriminalitas per kecamatan hasil analisis Zonal Statistics.",
       detail:
-        "Predictive Accuracy Index (PAI) digunakan untuk mengevaluasi efektivitas hotspot dalam memprediksi lokasi kejadian kriminalitas pada periode berikutnya."
-    },
+        "Analisis zonal statistik digunakan untuk mengidentifikasi tingkat kerawanan kriminalitas pada setiap desa berdasarkan nilai kepadatan kriminalitas hasil KDE. Hasil klasifikasi menunjukkan bahwa wilayah dengan tingkat kerawanan sangat tinggi seluruhnya berada di Kecamatan Kota Kudus, yaitu Kelurahan Panjunan, Barongan, Wergu Wetan, Nganguk, Wergu Kulon, Mlati Lor, dan Kramat. Sementara itu, tingkat kerawanan tinggi dan sedang umumnya ditemukan pada desa-desa yang berada di sekitar pusat kota dan kecamatan yang berbatasan langsung dengan Kecamatan Kota Kudus. Sebaliknya, desa-desa yang berada lebih jauh dari pusat kabupaten, terutama di Kecamatan Undaan, Dawe, dan Gebog, didominasi oleh tingkat kerawanan rendah hingga sangat rendah."
+      },
 
     {
       n: "04",
-      t: "Implementasi KRIMATLAS",
+      t: "Analisis kepadatan permukiman",
+      d: "Analisis hubungan antara kepadatan permukiman dan persebaran kejadian kriminalitas.",
+      image: "/src/public/images/Picture4.png",
+      visual: "Diagram distribusi jumlah kejadian kriminalitas berdasarkan tingkat kepadatan permukiman.",
+      detail:
+        "Sebagian besar kejadian kriminalitas di Kabupaten Kudus terjadi pada wilayah dengan kepadatan permukiman sedang hingga sangat tinggi. Kawasan yang lebih padat umumnya memiliki aktivitas dan interaksi penduduk yang lebih intens sehingga menciptakan lebih banyak peluang terjadinya tindak kejahatan. Temuan ini menunjukkan bahwa kepadatan permukiman merupakan salah satu karakteristik spasial yang berkaitan dengan persebaran kriminalitas."
+      },
+     {
+      n: "05",
+      t: "Analisis jaringan jalan",
+      d: "Analisis keterkaitan lokasi kejadian kriminalitas terhadap jaringan jalan utama.",
+      image: "/src/public/images/Picture5.png",
+      visual: "Diagram distribusi jumlah kejadian kriminalitas berdasarkan jarak terhadap jaringan jalan.",
+      detail:
+        "Analisis menunjukkan bahwa kejadian kriminalitas lebih banyak ditemukan pada lokasi yang berdekatan dengan jalan utama. Jumlah kejadian cenderung menurun seiring bertambahnya jarak dari jalan, yang mengindikasikan adanya hubungan antara aksesibilitas wilayah dan peluang terjadinya kejahatan. Tingginya mobilitas manusia dan kendaraan di sekitar jalan utama diduga menjadi faktor yang mendukung pola tersebut."
+      },
+        {
+      n: "06",
+      t: "Analisis PAI",
+      d: "Evaluasi kemampuan hotspot kriminalitas dalam memprediksi kejadian kriminalitas pada periode berikutnya.",
+      image: "/src/public/images/Picture5.png",
+      visual: "Diagram hasil evaluasi Predictive Accuracy Index (PAI) yang menunjukkan perbandingan luas hotspot dan jumlah kejadian kriminalitas yang berhasil diprediksi.",
+      detail:
+        "Nilai PAI sebesar 3,09 menunjukkan bahwa hotspot kriminalitas mampu memprediksi lokasi kejadian kriminal lebih baik dibandingkan distribusi acak. Meskipun hanya mencakup 18% luas wilayah, area hotspot berhasil mengidentifikasi 55% kejadian kriminalitas pada periode pengujian, sehingga berpotensi mendukung strategi pengawasan yang lebih efektif dan tepat sasaran."
+      },
+         {
+      n: "07",
+      t: "Uji Usabilitas",
       d: "Integrasi seluruh hasil analisis ke dalam platform WebGIS.",
-      image: "/images/results/dashboard.png",
+      image: "/src/public/images/md6.png",
       visual: "Dashboard interaktif KRIMATLAS berbasis CARTO.",
       detail:
         "Hasil analisis KDE, evaluasi PAI, serta berbagai informasi spasial lainnya diintegrasikan ke dalam platform KRIMATLAS untuk mendukung eksplorasi data kriminalitas secara interaktif."
@@ -556,20 +660,14 @@ function Results() {
 
         <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+            {/* <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
               Result · 04
-            </div>
+            </div> */}
 
-            <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
-              Mengungkap Pola Kriminalitas Kabupaten Kudus
+            <h2 className="mt-2 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] font-bold">
+              HASIL ANALISIS
             </h2>
           </div>
-
-          <p className="max-w-md text-[14.5px] leading-[1.65] text-[var(--ink-mute)]">
-            Hasil penelitian menunjukkan pola persebaran kriminalitas,
-            karakteristik spasial, kemampuan prediktif hotspot, serta
-            implementasi hasil analisis ke dalam platform KRIMATLAS.
-          </p>
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border hairline bg-[var(--hairline)] md:grid-cols-2">
@@ -682,94 +780,94 @@ function Results() {
   );
 }
 
-/* ---------------- About ---------------- */
+/* ---------------- About CRIMEMAP ---------------- */
 
 function About() {
   return (
-    <section id="about" className="border-b hairline">
+    <section id="about" className="border-b hairline relative overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
 
-        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-          About Researcher · 05
+        {/* <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+          Tentang KRIMATLAS · 05
+        </div> */}
+
+        <div className="mt-8 max-w-5xl">
+
+          <h2 className="mt-2 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)] font-bold">
+            Dari Kudus, untuk Kudus.
+          </h2>
+
+          <p className="mt-8 max-w-4xl text-[17px] leading-[1.9] text-[var(--ink-soft)]">
+            CRIMEMAP dikembangkan sebagai upaya pemanfaatan teknologi 
+            geospasial untuk memahami pola dan karakteristik kriminalitas di 
+            Kabupaten Kudus. Melalui integrasi analisis spasial dan WebGIS 
+            interaktif, platform ini dirancang untuk menyajikan informasi 
+            kriminalitas yang lebih mudah diakses, dipahami, dan 
+            dieksplorasi.
+          </p>
+
+          <p className="mt-6 max-w-4xl text-[17px] leading-[1.9] text-[var(--ink-soft)]">
+            Lebih dari sekadar luaran akademik, CRIMEMAP diharapkan dapat 
+            menjadi kontribusi bagi Kabupaten Kudus dalam mendukung 
+            pemahaman pola kriminalitas, meningkatkan kewaspadaan 
+            masyarakat, serta memperkuat pengambilan keputusan berbasis 
+            lokasi. 
+          </p>
+
         </div>
 
-        <div className="mt-6 grid gap-12 lg:grid-cols-[320px_1fr]">
+        {/* Info Cards */}
+        <div className="mt-14 grid gap-px overflow-hidden rounded-xl border hairline bg-[var(--hairline)] md:grid-cols-4">
 
-          {/* Foto */}
-          <div>
-            <div className="aspect-[4/5] overflow-hidden rounded-2xl border hairline bg-gray-100">
-              <img
-                src="src/public/images/md1.png"
-                alt="Peneliti"
-                className="h-full w-full object-cover"
-              />
+          <div className="bg-background p-6 text-center">
+            <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Peneliti
+            </div>
+
+            <div className="mt-3 text-lg">
+              Bausa Seta Pandega
             </div>
           </div>
 
-          {/* Informasi */}
-          <div>
-            <h2 className="text-display text-[clamp(2rem,4vw,3.75rem)]">
-              Bausa Seta Pandega
-            </h2>
+          <div className="bg-background p-6 text-center">
+            <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Institusi
+            </div>
 
-            <p className="mt-4 text-lg text-[var(--ink-soft)]">
-              Mahasiswa Sarjana Program Studi Teknik Geodesi 
-            </p>
+            <div className="mt-3 text-lg">
+              Universitas Gadjah Mada
+            </div>
+          </div>
 
-            <p className="mt-8 max-w-3xl text-[15px] leading-[1.9] text-[var(--ink-mute)]">
-              KRIMATLAS dikembangkan sebagai bagian dari penelitian
-              Tugas Akhir yang berfokus pada analisis kawasan rawan
-              kriminalitas di Kabupaten Kudus menggunakan metode
-              Kernel Density Estimation (KDE) dan Predictive Accuracy
-              Index (PAI).
-            </p>
+          <div className="bg-background p-6 text-center">
+            <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Program Studi
+            </div>
 
-            <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-[var(--ink-mute)]">
-              Penelitian ini mengintegrasikan analisis spasial dan
-              teknologi WebGIS untuk menyajikan informasi kriminalitas
-              secara interaktif, sehingga dapat dimanfaatkan sebagai
-              sarana eksplorasi data dan pendukung pengambilan
-              keputusan berbasis lokasi.
-            </p>
+            <div className="mt-3 text-lg">
+              Teknik Geodesi
+            </div>
+          </div>
 
-            {/* Info Card */}
-            <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="bg-background p-6 text-center">
+            <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Tahun
+            </div>
 
-              <div className="rounded-xl border hairline p-5">
-                <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-                  Program Studi
-                </div>
-
-                <div className="mt-3 text-sm">
-                  Teknik Geodesi 
-                </div>
-              </div>
-
-              <div className="rounded-xl border hairline p-5">
-                <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-                  Institusi
-                </div>
-
-                <div className="mt-3 text-sm">
-                  Universitas Gadjah Mada
-                </div>
-              </div>
-
-              <div className="rounded-xl border hairline p-5">
-                <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-                  Bidang
-                </div>
-
-                <div className="mt-3 text-sm">
-                Crime Mapping • Spatial Analysis • WebGIS
-                </div>
-              </div>
-
+            <div className="mt-3 text-lg">
+              2026
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* Watermark */}
+      <img
+        src="src/public/images/ugm-logo.jpg"
+        alt=""
+        className="pointer-events-none absolute right-[-120px] top-1/2 w-[450px] -translate-y-1/2 opacity-[0.05]"
+      />
     </section>
   );
 }
