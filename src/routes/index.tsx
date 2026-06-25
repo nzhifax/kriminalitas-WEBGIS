@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence  } from "framer-motion";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Crime Atlas — Spatial Intelligence for Urban Safety" },
+      { title: "KRIMATLAS" },
       {
         name: "description",
         content:
@@ -12,7 +13,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Crime Atlas",
+        content: "KRIMATLAS",
       },
       {
         property: "og:description",
@@ -31,11 +32,10 @@ function CrimeAtlas() {
     <main className="min-h-screen bg-background text-foreground font-sans">
       <Nav />
       <Hero />
-      <MapSection />
-      <TemporalAnalysis />
-      <CategoriesSection />
-      <RiskDistribution />
+      <Introduction />
       <Methodology />
+      <MapSection />
+      <Results />
       <About />
       <Footer />
     </main>
@@ -55,22 +55,34 @@ function Nav() {
             aria-hidden
           />
           <span className="text-display text-[15px] font-medium tracking-tight">
-            Crime Atlas
+            KRIMATLAS
           </span>
         </div>
         <nav className="hidden items-center gap-8 text-[13px] text-[var(--ink-soft)] md:flex">
-          <a href="#map" className="hover:text-foreground">Map</a>
-          <a href="#spatial" className="hover:text-foreground">Spatial</a>
-          <a href="#temporal" className="hover:text-foreground">Temporal</a>
+          <a href="#introduction" className="hover:text-foreground">introduction</a>
           <a href="#methodology" className="hover:text-foreground">Methodology</a>
+          <a href="#analisysmap" className="hover:text-foreground">Map</a>
+          <a href="#results" className="hover:text-foreground">Result</a>
           <a href="#about" className="hover:text-foreground">About</a>
         </nav>
-        <a
-          href="#map"
-          className="rounded-md bg-foreground px-3.5 py-1.5 text-[12.5px] font-medium text-background transition hover:opacity-90"
-        >
-          Open Atlas
-        </a>
+
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <a
+            href="https://forms.gle/xxxxxxxxxxxxxxxxx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md bg-foreground px-3.5 py-1.5 text-[12.5px] font-medium text-background transition hover:opacity-90"
+          >
+            Isi Formulir
+          </a>
+
+          <a
+            href="#analisysmap"
+            className="rounded-md bg-foreground px-3.5 py-1.5 text-[12.5px] font-medium text-background transition hover:opacity-90"
+          >
+            Buka Peta
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -93,7 +105,7 @@ function Hero() {
               className="h-1.5 w-1.5 rounded-full"
               style={{ background: RED }}
             />
-            Spatial Intelligence · v2025
+            Crime Spatial Analysis · KDE
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -101,9 +113,10 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.05 }}
             className="text-display text-[clamp(3rem,6.5vw,5.75rem)] text-foreground"
           >
-            Crime <span style={{ color: RED }}>Atlas.</span>
-            <br />
-            <span className="text-[var(--ink-soft)]">Mapped with intent.</span>
+            KRIM<span style={{ color: RED }}>ATLAS.</span>
+<span className="block mt-3 text-[28px]  font-normal leading-relaxed tracking-wide text-[var(--ink-soft)]">
+  Crime Risk Mapping & Spatial Analysis
+</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -111,9 +124,9 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mt-8 max-w-xl text-[16px] leading-[1.65] text-[var(--ink-mute)]"
           >
-            A spatial intelligence platform for understanding crime distribution,
-            hotspot locations, and urban safety patterns — through interactive
-            mapping and data visualization.
+            Mengidentifikasi kawasan rawan kriminalitas
+            di Kabupaten Kudus menggunakan metode
+            Kernel Density Estimation (KDE).
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -164,71 +177,295 @@ function Hero() {
   );
 }
 
-/* ---------------- Stats ---------------- */
+/* ---------------- Introduction Section ---------------- */
 
-// function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
-//   const ref = useRef<HTMLSpanElement>(null);
-//   const inView = useInView(ref, { once: true, margin: "-80px" });
-//   const mv = useMotionValue(0);
-//   const spring = useSpring(mv, { stiffness: 60, damping: 18 });
-//   const rounded = useTransform(spring, (v) => Math.round(v).toLocaleString());
-//   useEffect(() => {
-//     if (inView) mv.set(value);
-//   }, [inView, mv, value]);
-//   return (
-//     <span ref={ref}>
-//       <motion.span>{rounded}</motion.span>
-//       {suffix}
-//     </span>
-//   );
-// }
+function Introduction() {
+  return (
+    <section id="introduction" className="border-b hairline">
+      <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Introduction · 01
+            </div>
 
-// function Stats() {
-//   const items = [
-//     { label: "Total Cases", value: STATS.totalCases },
-//     { label: "Crime Categories", value: STATS.categories },
-//     { label: "High Risk Areas", value: STATS.highRisk },
-//     { label: "Data Coverage", value: STATS.coverage, suffix: "%" },
-//   ];
-//   return (
-//     <section className="border-b hairline">
-//       <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px overflow-hidden bg-[var(--hairline)] lg:grid-cols-4">
-//         {items.map((it) => (
-//           <div key={it.label} className="bg-background p-8 lg:p-10">
-//             <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-//               {it.label}
-//             </div>
-//             <div className="text-display mt-4 text-[44px] leading-none text-foreground lg:text-[56px]">
-//               <Counter value={it.value} suffix={it.suffix} />
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
+            <h2 className="text-display mt-3 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)]">
+              Analisis Kawasan Rawan Kriminalitas di Kabupaten Kudus.
+            </h2>
+          </div>
+
+          <p className="max-w-md text-[14.5px] leading-[1.65] text-[var(--ink-mute)]">
+            KRIMATLAS merupakan web map interaktif yang dikembangkan untuk
+            memvisualisasikan kawasan rawan kriminalitas di Kabupaten Kudus
+            menggunakan metode Kernel Density Estimation (KDE).
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="rounded-xl border hairline p-6">
+            <div className="mb-3 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Latar Belakang
+            </div>
+
+            <p className="text-[14px] leading-[1.8] text-[var(--ink-soft)]">
+              Kriminalitas merupakan permasalahan yang dapat memengaruhi
+              keamanan, ketertiban, dan kualitas hidup masyarakat. Analisis
+              spasial diperlukan untuk mengidentifikasi lokasi yang memiliki
+              konsentrasi kejadian kriminalitas tinggi.
+            </p>
+          </div>
+
+          <div className="rounded-xl border hairline p-6">
+            <div className="mb-3 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Tujuan Penelitian
+            </div>
+
+            <p className="text-[14px] leading-[1.8] text-[var(--ink-soft)]">
+              Menganalisis pola spasial kawasan rawan kriminalitas menggunakan
+              metode KDE, mengevaluasi kemampuan prediktif hotspot dengan PAI,
+              serta menyajikan hasil analisis melalui web map interaktif.
+            </p>
+          </div>
+
+          <div className="rounded-xl border hairline p-6">
+            <div className="mb-3 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Metodologi
+            </div>
+
+            <p className="text-[14px] leading-[1.8] text-[var(--ink-soft)]">
+              Kernel Density Estimation (KDE) digunakan untuk menghasilkan
+              permukaan kepadatan kriminalitas sehingga hotspot dapat
+              diidentifikasi dan divisualisasikan secara spasial di wilayah
+              Kabupaten Kudus.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Methodology ---------------- */
+
+function Methodology() {
+  const [selectedStep, setSelectedStep] = useState<any>(null);
+
+  const steps = [
+  {
+    n: "01",
+    t: "Pengumpulan & Klasifikasi Data",
+    d: "Data laporan polisi diklasifikasikan berdasarkan ICCS.",
+    detail:
+      "Data penelitian diperoleh dari Laporan Polisi Polres Kudus periode Juni 2021–Mei 2026. Setiap kejadian diklasifikasikan berdasarkan International Classification of Crime for Statistical Purposes (ICCS) sehingga diperoleh kelompok dan jenis kejahatan yang terstandarisasi. Tahap ini menghasilkan basis data kriminalitas yang siap digunakan untuk analisis spasial.",
+    image: "/src/public/images/md1.png",
+      visual: "Diagram distribusi kelompok dan jenis kejahatan"
+  },
+
+  {
+    n: "02",
+    t: "Geocoding TKP",
+    d: "Konversi lokasi kejadian menjadi koordinat geografis.",
+    detail:
+      "Informasi lokasi pada setiap laporan polisi dikonversi menjadi koordinat geografis melalui proses geocoding. Hasil proses ini berupa data titik kriminalitas yang merepresentasikan lokasi kejadian di lapangan. Data titik selanjutnya digunakan sebagai dasar seluruh analisis spasial.",
+    image: "/src/public/images/md1.png",
+      visual: "Alamat LP → Koordinat → Titik pada Peta"
+  },
+
+  {
+    n: "03",
+    t: "Analisis Spasial",
+    d: "Identifikasi hotspot dan karakteristik spasial kriminalitas.",
+    detail:
+      "Pola persebaran kriminalitas dianalisis menggunakan Kernel Density Estimation (KDE) untuk mengidentifikasi hotspot kriminalitas. Selain itu dilakukan analisis kepadatan permukiman dan jarak kejadian kriminalitas terhadap jaringan jalan arteri maupun kolektor untuk memahami hubungan antara kriminalitas dan kondisi lingkungan.",
+    image: "/src/public/images/md1.png",
+      visual: "Peta Hotspot KDE"
+  },
+
+  {
+    n: "04",
+    t: "Evaluasi PAI",
+    d: "Pengujian kemampuan prediktif hotspot kriminalitas.",
+    detail:
+      "Hotspot kriminalitas dievaluasi menggunakan Predictive Accuracy Index (PAI). Evaluasi dilakukan dengan membandingkan hotspot periode Juni 2021–Mei 2025 terhadap data kejadian kriminalitas periode Juni 2025–Mei 2026 untuk mengetahui kemampuan prediksi hotspot.",
+    image: "/src/public/images/md1.png",
+      visual: "Hotspot + Titik Kriminalitas Tahun Berikutnya"
+  },
+
+  {
+    n: "05",
+    t: "Integrasi Hasil",
+    d: "Visualisasi hasil analisis pada platform KRIMATLAS.",
+    detail:
+      "Seluruh hasil analisis diintegrasikan ke dalam platform CARTO untuk membangun webmap kriminalitas Kabupaten Kudus. Peta interaktif dilengkapi layer hotspot kriminalitas, tingkat kerawanan per desa, karakteristik spasial, serta dashboard statistik yang dapat dieksplorasi pengguna.",
+    image: "/src/public/images/md1.png",
+      visual: "Dashboard KRIMATLAS"
+  },
+
+  {
+    n: "06",
+    t: "Evaluasi Usabilitas",
+    d: "Pengujian kemudahan penggunaan webmap.",
+    detail:
+      "Webmap yang telah dikembangkan dievaluasi menggunakan kuesioner berbasis lima aspek usabilitas (5Es), yaitu Effective, Efficient, Engaging, Error Tolerant, dan Easy to Learn. Hasil evaluasi digunakan untuk menilai kualitas penggunaan sistem.",
+    image: "/src/public/images/md1.png",
+      visual: "Diagram Hasil Evaluasi 5Es"
+  }
+  ];
+
+  return (
+    <section id="methodology" className="border-b hairline">
+      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
+        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+          Methodology · 02
+        </div>
+
+        <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
+          Alur Analisis Kawasan Rawan Kriminalitas
+        </h2>
+
+        <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-[var(--ink-mute)]">
+          Penelitian ini menggunakan pendekatan analisis spasial berbasis
+          Kernel Density Estimation (KDE) untuk mengidentifikasi hotspot
+          kriminalitas di Kabupaten Kudus, mengevaluasi kemampuan prediktif
+          menggunakan Predictive Accuracy Index (PAI), dan menyajikannya
+          melalui platform KRIMATLAS.
+        </p>
+
+        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border hairline bg-[var(--hairline)] md:grid-cols-2 lg:grid-cols-3">
+          {steps.map((s, i) => (
+            <motion.div
+              key={s.n}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              onClick={() => setSelectedStep(s)}
+              className="cursor-pointer bg-background p-8 transition-all hover:bg-gray-50 lg:p-10"
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+                  Tahap {s.n}
+                </span>
+
+                <span className="text-xl">→</span>
+              </div>
+
+              <h3 className="text-display mt-6 text-[24px] text-foreground">
+                {s.t}
+              </h3>
+
+              <p className="mt-3 text-[13.5px] leading-[1.65] text-[var(--ink-mute)]">
+                {s.d}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedStep && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedStep(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between border-b p-6">
+                <div>
+                  <div className="text-xs uppercase tracking-[0.14em] text-gray-500">
+                    Tahap {selectedStep.n}
+                  </div>
+
+                  <h3 className="mt-1 text-3xl font-semibold">
+                    {selectedStep.t}
+                  </h3>
+                </div>
+
+                <button
+                  onClick={() => setSelectedStep(null)}
+                  className="text-3xl text-gray-400 transition hover:text-black"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="grid gap-8 p-6 lg:grid-cols-2">
+
+                {/* Visual */}
+                <div>
+                  <img
+                    src={selectedStep.image}
+                    alt={selectedStep.t}
+                    className="w-full rounded-xl border object-cover shadow-sm"
+                  />
+
+                  <div className="mt-4 rounded-lg bg-gray-50 p-4">
+                    <div className="text-xs uppercase tracking-wider text-gray-500">
+                      Visual Output
+                    </div>
+
+                    <p className="mt-2 text-sm text-gray-700">
+                      {selectedStep.visual}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Penjelasan */}
+                <div>
+                  <div className="rounded-xl border p-6">
+                    <h4 className="text-lg font-medium">
+                      Deskripsi Tahapan
+                    </h4>
+
+                    <p className="mt-4 leading-8 text-gray-600">
+                      {selectedStep.detail}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
 
 /* ---------------- Interactive Map Section ---------------- */
 
 function MapSection() {
   return (
-    <section id="map" className="border-b hairline">
+    <section id="analisysmap" className="border-b hairline">
       <div className="mx-auto max-w-[1400px] px-6 pb-6 pt-20 lg:px-10 lg:pt-28">
         <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-              Interactive · 01
+              Analysis Map · 03
             </div>
 
             <h2 className="text-display mt-3 max-w-3xl text-[clamp(2rem,4.5vw,3.75rem)]">
-              Where crime concentrates.
+              Visualisasi Kawasan Rawan Kriminalitas.
             </h2>
           </div>
 
           <p className="max-w-md text-[14.5px] leading-[1.65] text-[var(--ink-mute)]">
-            Explore crime patterns directly through the CARTO dashboard.
-            Spatial filters, legends, and analysis tools are provided within
-            the interactive map.
+            Eksplorasi hasil analisis kriminalitas Kabupaten Kudus melalui
+            platform KRIMATLAS. Peta interaktif menampilkan hotspot
+            kriminalitas, tingkat kerawanan wilayah, karakteristik spasial,
+            serta berbagai informasi pendukung untuk mendukung interpretasi
+            hasil penelitian.
           </p>
         </div>
       </div>
@@ -265,202 +502,182 @@ function MapSection() {
   );
 }
 
-/* ---------------- Temporal Analysis ---------------- */
+/* ---------------- Results Section ---------------- */
 
-function TemporalAnalysis() {
-  return (
-    <section id="temporal" className="border-b hairline">
-      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
-        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-          Temporal · 03
-        </div>
+function Results() {
+   const [selectedResult, setSelectedResult] = useState<any>(null);
+  const results = [
+    {
+      n: "01",
+      t: "Hotspot Kriminalitas",
+      d: "Identifikasi kawasan dengan konsentrasi kriminalitas tertinggi menggunakan KDE.",
+      image: "/images/results/hotspot-map.png",
+      visual: "Peta hotspot kriminalitas hasil Kernel Density Estimation.",
+      detail:
+        "Hasil analisis KDE menunjukkan bahwa kriminalitas di Kabupaten Kudus tidak tersebar secara merata. Konsentrasi kejadian kriminalitas cenderung terpusat pada wilayah tertentu yang membentuk hotspot dengan tingkat kerawanan tinggi."
+    },
 
-        <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
-          When crime happens.
-        </h2>
+    {
+      n: "02",
+      t: "Karakteristik Spasial",
+      d: "Hubungan kriminalitas dengan kepadatan permukiman dan jaringan jalan.",
+      image: "/images/results/spatial-characteristics.png",
+      visual:
+        "Diagram kepadatan permukiman dan jarak terhadap jalan arteri/kolektor.",
+      detail:
+        "Sebagian besar kejadian kriminalitas ditemukan pada wilayah dengan kepadatan permukiman sedang hingga tinggi. Selain itu, kejadian kriminalitas cenderung berada pada lokasi yang berdekatan dengan jaringan jalan utama."
+    },
 
-        <p className="mt-6 max-w-2xl text-[15px] leading-[1.7] text-[var(--ink-mute)]">
-          Temporal patterns and yearly crime trends are explored directly
-          through the CARTO analytical dashboard.
-        </p>
+    {
+      n: "03",
+      t: "Evaluasi PAI",
+      d: "Pengujian kemampuan prediktif hotspot kriminalitas.",
+      image: "/images/results/pai-evaluation.png",
+      visual:
+        "Overlay hotspot dengan data kriminalitas periode pengujian.",
+      detail:
+        "Predictive Accuracy Index (PAI) digunakan untuk mengevaluasi efektivitas hotspot dalam memprediksi lokasi kejadian kriminalitas pada periode berikutnya."
+    },
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="relative mt-14 h-[420px] overflow-hidden rounded-xl border hairline bg-[var(--surface-1)]"
-        >
-          <iframe
-            src="LINK_CARTO_TEMPORAL_CHART"
-            title="Temporal Analysis"
-            loading="lazy"
-            className="h-full w-full border-0"
-          />
-
-          <div className="absolute left-4 top-4 rounded-md border hairline bg-white/85 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)] backdrop-blur">
-            Temporal Trends
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Categories ---------------- */
-
-function CategoriesSection() {
-  return (
-    <section className="border-b hairline">
-      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
-        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-          Categories · 04
-        </div>
-
-        <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
-          The shape of risk.
-        </h2>
-
-        <p className="mt-6 max-w-2xl text-[15px] leading-[1.7] text-[var(--ink-mute)]">
-          Crime categories and their relative contribution to overall risk
-          are explored through interactive CARTO visualizations.
-        </p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="relative mt-16 h-[480px] overflow-hidden rounded-xl border hairline bg-[var(--surface-1)]"
-        >
-          <iframe
-            src="LINK_CARTO_CATEGORY_CHART"
-            title="Crime Categories"
-            loading="lazy"
-            className="h-full w-full border-0"
-          />
-
-          <div className="absolute left-4 top-4 rounded-md border hairline bg-white/85 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)] backdrop-blur">
-            Category Distribution
-          </div>
-
-          <div className="absolute bottom-4 left-4 rounded-md border hairline bg-white/85 px-3 py-2 text-[11.5px] text-[var(--ink-soft)] backdrop-blur">
-            Interactive CARTO Chart
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-/* ---------------- Risk Distribution (hex map) ---------------- */
-
-function RiskDistribution() {
-  return (
-    <section className="border-b hairline">
-      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
-        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-          Risk Index · 05
-        </div>
-
-        <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
-          Crime Risk Index.
-        </h2>
-
-        <p className="mt-6 max-w-2xl text-[15px] leading-[1.7] text-[var(--ink-mute)]">
-          Risk aggregation and spatial intensity mapping are computed directly
-          in CARTO using hexbin / density analysis layers.
-        </p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="relative mt-14 h-[520px] overflow-hidden rounded-xl border hairline bg-[var(--surface-1)]"
-        >
-          <iframe
-            src="LINK_CARTO_RISK_MAP"
-            title="Risk Index Map"
-            loading="lazy"
-            className="h-full w-full border-0"
-          />
-
-          {/* Label top */}
-          <div className="absolute left-4 top-4 rounded-md border hairline bg-white/85 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)] backdrop-blur">
-            Hex / Heat Analysis
-          </div>
-
-          {/* Legend bottom */}
-          <div className="absolute bottom-4 left-4 flex items-center gap-3 rounded-md border hairline bg-white/85 px-4 py-2 text-[11.5px] text-[var(--ink-soft)] backdrop-blur">
-            <span className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-red-600" />
-              High
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-gray-400" />
-              Medium
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-gray-200" />
-              Low
-            </span>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Methodology ---------------- */
-
-function Methodology() {
-  const steps = [
-    { n: "01", t: "Data Collection", d: "Aggregated incident reports & open datasets." },
-    { n: "02", t: "Spatial Processing", d: "Geocoding, projection, and de-duplication." },
-    { n: "03", t: "CARTO Analysis", d: "Tile-based aggregation and basemap serving." },
-    { n: "04", t: "Hotspot Detection", d: "Kernel density estimation across 600+ points." },
-    { n: "05", t: "Visualization", d: "Layer rendering with Leaflet and Recharts." },
-    { n: "06", t: "Crime Insights", d: "Patterns surfaced for analysts and citizens." },
+    {
+      n: "04",
+      t: "Implementasi KRIMATLAS",
+      d: "Integrasi seluruh hasil analisis ke dalam platform WebGIS.",
+      image: "/images/results/dashboard.png",
+      visual: "Dashboard interaktif KRIMATLAS berbasis CARTO.",
+      detail:
+        "Hasil analisis KDE, evaluasi PAI, serta berbagai informasi spasial lainnya diintegrasikan ke dalam platform KRIMATLAS untuk mendukung eksplorasi data kriminalitas secara interaktif."
+    }
   ];
-  return (
-    <section id="methodology" className="border-b hairline">
-      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
-        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-          Methodology · 06
-        </div>
-        <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
-          From points to patterns.
-        </h2>
 
-        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border hairline bg-[var(--hairline)] md:grid-cols-2 lg:grid-cols-3">
-          {steps.map((s, i) => (
+  return (
+    <section id="results" className="border-b hairline">
+      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
+
+        <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+              Result · 04
+            </div>
+
+            <h2 className="text-display mt-3 max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)]">
+              Mengungkap Pola Kriminalitas Kabupaten Kudus
+            </h2>
+          </div>
+
+          <p className="max-w-md text-[14.5px] leading-[1.65] text-[var(--ink-mute)]">
+            Hasil penelitian menunjukkan pola persebaran kriminalitas,
+            karakteristik spasial, kemampuan prediktif hotspot, serta
+            implementasi hasil analisis ke dalam platform KRIMATLAS.
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border hairline bg-[var(--hairline)] md:grid-cols-2">
+          {results.map((r, i) => (
             <motion.div
-              key={s.n}
+              key={r.n}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="bg-background p-8 lg:p-10"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              onClick={() => setSelectedResult(r)}
+              className="cursor-pointer bg-background p-8 transition hover:bg-gray-50 lg:p-10"
             >
               <div className="flex items-start justify-between">
                 <span className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-                  Step {s.n}
+                  Hasil {r.n}
                 </span>
-                <span
-                  className="h-1.5 w-1.5 rounded-full"
-                  style={{ background: i === steps.length - 1 ? RED : "#cfcfcf" }}
-                />
+
+                <span className="text-xl">→</span>
               </div>
+
               <h3 className="text-display mt-6 text-[24px] text-foreground">
-                {s.t}
+                {r.t}
               </h3>
+
               <p className="mt-3 text-[13.5px] leading-[1.65] text-[var(--ink-mute)]">
-                {s.d}
+                {r.d}
               </p>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedResult && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedResult(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between border-b p-6">
+                <div>
+                  <div className="text-xs uppercase tracking-[0.14em] text-gray-500">
+                    Hasil {selectedResult.n}
+                  </div>
+
+                  <h3 className="mt-1 text-3xl font-semibold">
+                    {selectedResult.t}
+                  </h3>
+                </div>
+
+                <button
+                  onClick={() => setSelectedResult(null)}
+                  className="text-3xl text-gray-400 transition hover:text-black"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="grid gap-8 p-6 lg:grid-cols-2">
+
+                <div>
+                  <img
+                    src={selectedResult.image}
+                    alt={selectedResult.t}
+                    className="w-full rounded-xl border shadow-sm"
+                  />
+
+                  <div className="mt-4 rounded-lg bg-gray-50 p-4">
+                    <div className="text-xs uppercase tracking-wider text-gray-500">
+                      Visualisasi
+                    </div>
+
+                    <p className="mt-2 text-sm text-gray-700">
+                      {selectedResult.visual}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="rounded-xl border p-6">
+                    <h4 className="text-lg font-medium">
+                      Interpretasi Hasil
+                    </h4>
+
+                    <p className="mt-4 leading-8 text-gray-600">
+                      {selectedResult.detail}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -471,39 +688,86 @@ function About() {
   return (
     <section id="about" className="border-b hairline">
       <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-32">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.4fr]">
+
+        <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+          About Researcher · 05
+        </div>
+
+        <div className="mt-6 grid gap-12 lg:grid-cols-[320px_1fr]">
+
+          {/* Foto */}
           <div>
-            <div className="text-[11.5px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
-              About
+            <div className="aspect-[4/5] overflow-hidden rounded-2xl border hairline bg-gray-100">
+              <img
+                src="src/public/images/md1.png"
+                alt="Peneliti"
+                className="h-full w-full object-cover"
+              />
             </div>
-            <h2 className="text-display mt-3 text-[clamp(2rem,4vw,3.25rem)]">
-              Safer cities, told through data.
+          </div>
+
+          {/* Informasi */}
+          <div>
+            <h2 className="text-display text-[clamp(2rem,4vw,3.75rem)]">
+              Bausa Seta Pandega
             </h2>
-          </div>
-          <div className="space-y-6 text-[15.5px] leading-[1.75] text-[var(--ink-soft)]">
-            <p>
-              Crime Atlas is an independent geospatial research project that
-              treats urban safety as a design problem. We combine modern
-              cartography with rigorous spatial analysis to make complex
-              datasets legible to anyone.
+
+            <p className="mt-4 text-lg text-[var(--ink-soft)]">
+              Mahasiswa Sarjana Program Studi Teknik Geodesi 
             </p>
-            <p>
-              The platform is open, reproducible, and built entirely in the
-              browser — no proprietary GIS, no walled gardens.
+
+            <p className="mt-8 max-w-3xl text-[15px] leading-[1.9] text-[var(--ink-mute)]">
+              KRIMATLAS dikembangkan sebagai bagian dari penelitian
+              Tugas Akhir yang berfokus pada analisis kawasan rawan
+              kriminalitas di Kabupaten Kudus menggunakan metode
+              Kernel Density Estimation (KDE) dan Predictive Accuracy
+              Index (PAI).
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {["Crime Mapping", "Spatial Intelligence", "Urban Safety", "Geospatial Analysis"].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border hairline bg-[var(--surface-1)] px-3 py-1 text-[12px] text-[var(--ink-soft)]"
-                  >
-                    {tag}
-                  </span>
-                ),
-              )}
+
+            <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-[var(--ink-mute)]">
+              Penelitian ini mengintegrasikan analisis spasial dan
+              teknologi WebGIS untuk menyajikan informasi kriminalitas
+              secara interaktif, sehingga dapat dimanfaatkan sebagai
+              sarana eksplorasi data dan pendukung pengambilan
+              keputusan berbasis lokasi.
+            </p>
+
+            {/* Info Card */}
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+
+              <div className="rounded-xl border hairline p-5">
+                <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+                  Program Studi
+                </div>
+
+                <div className="mt-3 text-sm">
+                  Teknik Geodesi 
+                </div>
+              </div>
+
+              <div className="rounded-xl border hairline p-5">
+                <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+                  Institusi
+                </div>
+
+                <div className="mt-3 text-sm">
+                  Universitas Gadjah Mada
+                </div>
+              </div>
+
+              <div className="rounded-xl border hairline p-5">
+                <div className="text-[11px] uppercase tracking-[0.14em] text-[var(--ink-mute)]">
+                  Bidang
+                </div>
+
+                <div className="mt-3 text-sm">
+                Crime Mapping • Spatial Analysis • WebGIS
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -522,17 +786,16 @@ function Footer() {
             style={{ background: RED }}
           />
           <span className="text-display text-[14px] font-medium">
-            Crime Atlas
+            KRIMATLAS
           </span>
           <span className="ml-3 text-[12px] text-[var(--ink-mute)]">
             © {new Date().getFullYear()}
           </span>
         </div>
         <nav className="flex flex-wrap gap-6 text-[13px] text-[var(--ink-soft)]">
-          <a href="#about" className="hover:text-foreground">About</a>
+          <a href="#introduction" className="hover:text-foreground">About</a>
           <a href="#methodology" className="hover:text-foreground">Methodology</a>
-          <a href="#" className="hover:text-foreground">Data Sources</a>
-          <a href="#" className="hover:text-foreground">Contact</a>
+          <a href="#about" className="hover:text-foreground">Contact</a>
         </nav>
       </div>
     </footer>
