@@ -135,13 +135,13 @@ function Hero() {
             className="mt-10 flex flex-wrap items-center gap-3"
           >
             <a
-              href="#map"
+              href="#analisysmap"
               className="rounded-md bg-foreground px-5 py-3 text-[13.5px] font-medium text-background transition hover:opacity-90"
             >
               Explore Map →
             </a>
             <a
-              href="#spatial"
+              href="#results"
               className="rounded-md border hairline bg-background px-5 py-3 text-[13.5px] font-medium text-foreground transition hover:bg-[var(--surface-1)]"
             >
               View Analysis
